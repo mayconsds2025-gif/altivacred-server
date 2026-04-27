@@ -1,0 +1,41 @@
+{
+  "name": "altivacred-server",
+  "version": "1.0.0",
+  "description": "Backend AltivaCred - API Express com integração V8 e C6",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "api",
+    "v8",
+    "oauth",
+    "puppeteer",
+    "c6"
+  ],
+  "author": "Maycon Souza",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.985.0",
+    "@google-cloud/storage": "^7.19.0",
+    "@sparticuz/chromium": "^141.0.0",
+    "axios": "^1.13.2",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "csv-writer": "^1.6.0",
+    "dayjs": "^1.11.19",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "mysql2": "^3.15.3",
+    "puppeteer-core": "^21.3.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

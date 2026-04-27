@@ -1,0 +1,47 @@
+[
+  {
+    "nome": "Maycon Da Silva",
+    "email": "maycondepv10@gmail.com",
+    "cpf": "449.355.128-30",
+    "telefone": "11967345738",
+    "senha": "@Mayconsouza10"
+  },
+  {
+    "nome": "Maycon Da Silva",
+    "email": "maycon.sds@outlook.com",
+    "cpf": "449.355.128-30",
+    "telefone": "11967345738",
+    "senha": "123"
+  },
+  {
+    "nome": "Ronaldo Nazário",
+    "email": "ronaldo@gmail.com",
+    "cpf": "111111111111",
+    "telefone": "11985644",
+    "senha": "456"
+  },
+  {
+    "nome": "Cleuza Regina",
+    "email": "cleuza@gmail.com",
+    "cpf": "44935512830",
+    "telefone": "111111111",
+    "senha": "123",
+    "confirmarSenha": "123"
+  },
+  {
+    "nome": "Maycon Da Silva",
+    "email": "maycondepv100@gmail.com",
+    "cpf": "449.355.128-30",
+    "telefone": "11967345738",
+    "senha": "123",
+    "confirmarSenha": "123"
+  },
+  {
+    "nome": "Ronaldo Nazaio",
+    "email": "ronaldo2@gmail.com",
+    "cpf": "1111111111",
+    "telefone": "1111111111",
+    "senha": "123",
+    "confirmarSenha": "123"
+  }
+]
