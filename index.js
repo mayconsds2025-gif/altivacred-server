@@ -2381,55 +2381,7 @@ app.post("/saque/criar-proposta", async (req, res) => {
   }
 });
 
-    console.log(`📦 [${requestId}] Payload enviado para Novo Saque`);
-    console.log(JSON.stringify(payload, null, 2));
 
-    // =========================================================
-    // 3️⃣ CHAMADA CREATE_PROPOSAL
-    // =========================================================
-    const resp = await axios.post(
-      "https://homolog.novosaque.com.br/api/v1/contracts/create_proposal",
-      payload,
-      {
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-          "Content-Type": "application/json"
-        },
-        timeout: 15000
-      }
-    );
-
-    console.log(`🟩 [${requestId}] Proposta criada com sucesso`);
-    console.log(JSON.stringify(resp.data, null, 2));
-
-    // =========================================================
-    // 4️⃣ RETORNO PARA O FRONT
-    // =========================================================
-    return res.json({
-      sucesso: true,
-      proposta: resp.data
-    });
-
-  } catch (err) {
-    console.log(`🟥 [${requestId}] ERRO criar proposta`);
-
-    if (err?.response) {
-      console.log("🟥 Erro da API Novo Saque:");
-      console.log("Status:", err.response.status);
-      console.log("Body:", JSON.stringify(err.response.data, null, 2));
-    } else {
-      console.log("🟥 Erro interno:");
-      console.log(err.message);
-    }
-
-    console.log("==============================\n");
-
-    return res.status(500).json({
-      sucesso: false,
-      erro: err?.response?.data || err.message
-    });
-  }
-});
 app.post("/saque/registrar-atendimento", async (req, res) => {
   const requestId = `SAQUE-ATEND-${Date.now()}`;
 
