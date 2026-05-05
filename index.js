@@ -1990,7 +1990,7 @@ app.post("/saque/simular", async (req, res) => {
     console.log(JSON.stringify(payload, null, 2));
 
     const resp = await axios.post(
-      "https://homolog.novosaque.com.br/api/v1/simulations/simulation_values/credit_limit",
+      "https://sistema.novosaque.com.br/api/v1/simulations/simulation_values/credit_limit",
       payload,
       {
         headers: {
@@ -2195,7 +2195,7 @@ app.post("/saque/cadastrar-cliente", async (req, res) => {
     // 3️⃣ CHAMADA OFICIAL /customers
     // =========================================================
     const resp = await axios.post(
-      "https://homolog.novosaque.com.br/api/v1/customers",
+      "https://sistema.novosaque.com.br/api/v1/customers",
       payload,
       {
         headers: {
@@ -2338,7 +2338,7 @@ app.post("/saque/criar-proposta", async (req, res) => {
     // 3️⃣ CHAMADA CREATE_PROPOSAL COM QUERY PARAM
     // =========================================================
     const resp = await axios.post(
-      `https://homolog.novosaque.com.br/api/v1/contracts/create_proposal?simulation_id=${simulacao.idSimulationAtendimento}`,
+      `https://sistema.novosaque.com.br/api/v1/contracts/create_proposal?simulation_id=${simulacao.idSimulationAtendimento}`,
       payload,
       {
         headers: {
@@ -2438,7 +2438,7 @@ app.post("/saque/registrar-atendimento", async (req, res) => {
     // 3️⃣ CHAMADA OFICIAL
     // =========================================================
     const resp = await axios.post(
-      "https://homolog.novosaque.com.br/api/v1/simulations",
+      "https://sistema.novosaque.com.br/api/v1/simulations",
       payload,
       {
         headers: {
