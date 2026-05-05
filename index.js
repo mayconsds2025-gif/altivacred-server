@@ -2262,6 +2262,14 @@ app.post("/saque/criar-proposta", async (req, res) => {
       });
     }
 
+    // ✅ VALIDAÇÃO DO simulation_id (QUERY PARAM)
+    if (!simulacao.idSimulationAtendimento) {
+      return res.status(400).json({
+        sucesso: false,
+        erro: "idSimulationAtendimento ausente"
+      });
+    }
+
     const customerIdNum = Number(customerId);
     if (!Number.isInteger(customerIdNum)) {
       return res.status(400).json({
@@ -2311,25 +2319,67 @@ app.post("/saque/criar-proposta", async (req, res) => {
     console.log(`✅ [${requestId}] Autenticação OK`);
 
     // =========================================================
-    // 2️⃣ PAYLOAD OFICIAL CREATE_PROPOSAL
+    // 2️⃣ PAYLOAD OFICIAL (SEM simulation_id NO BODY)
     // =========================================================
-    if (!simulacao.idSimulationAtendimento) {
-  return res.status(400).json({
-    sucesso: false,
-    erro: "idSimulationAtendimento ausente"
-  });
-}
-	const payload = {
-  contract: {
-    contract_value: contractValue,
-    amount_charged: amountCharged,
-    installments: installments,
-    kind_integrator: 0,
-    customer_id: customerIdNum
-  },
-  simulation_id: simulacao.idSimulationAtendimento
-};
+    const payload = {
+      contract: {
+        contract_value: contractValue,
+        amount_charged: amountCharged,
+        installments: installments,
+        kind_integrator: 0,
+        customer_id: customerIdNum
+      }
+    };
 
+    console.log(`📦 [${requestId}] Payload enviado para Novo Saque`);
+    console.log(JSON.stringify(payload, null, 2));
+
+    // =========================================================
+    // 3️⃣ CHAMADA CREATE_PROPOSAL COM QUERY PARAM
+    // =========================================================
+    const resp = await axios.post(
+      `https://homolog.novosaque.com.br/api/v1/contracts/create_proposal?simulation_id=${simulacao.idSimulationAtendimento}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+          "Content-Type": "application/json"
+        },
+        timeout: 15000
+      }
+    );
+
+    console.log(`🟩 [${requestId}] Proposta criada com sucesso`);
+    console.log(JSON.stringify(resp.data, null, 2));
+
+    // =========================================================
+    // 4️⃣ RETORNO PARA O FRONT
+    // =========================================================
+    return res.json({
+      sucesso: true,
+      proposta: resp.data
+    });
+
+  } catch (err) {
+    console.log(`🟥 [${requestId}] ERRO criar proposta`);
+
+    if (err?.response) {
+      console.log("🟥 Erro da API Novo Saque:");
+      console.log("Status:", err.response.status);
+      console.log("Body:", JSON.stringify(err.response.data, null, 2));
+    } else {
+      console.log("🟥 Erro interno:");
+      console.log(err.message);
+    }
+
+    console.log("==============================\n");
+
+    return res.status(500).json({
+      sucesso: false,
+      erro: err?.response?.data || err.message
+    });
+  }
+});
 
     console.log(`📦 [${requestId}] Payload enviado para Novo Saque`);
     console.log(JSON.stringify(payload, null, 2));
